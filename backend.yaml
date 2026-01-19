@@ -15,4 +15,18 @@
       name: expense
       comment: add expense system user
       system: true
+  - name: creating app directory
+    ansible.builtin.file:
+      state: directory
+      path: /app
 
+  - name: Download the expense application
+    ansible.builtin.get_url:
+      url: https://expense-joindevops.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+      dest: /tmp/backend.zip
+
+  - name: Unarchive a file that is already on the remote machine
+    ansible.builtin.unarchive:
+      src: /tmp/backend.zip
+      dest: /app
+      remote_src: yes
