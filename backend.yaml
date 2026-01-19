@@ -15,7 +15,7 @@
       name: expense
       comment: add expense system user
       system: true
-      
+
   - name: creating app directory
     ansible.builtin.file:
       state: directory
@@ -31,3 +31,32 @@
       src: /tmp/backend.zip
       dest: /app
       remote_src: yes
+  
+  - name: Install dependencies 
+    community.general.npm:
+      path: /app
+
+  - name: Copy backend service
+    ansible.builtin.copy:
+      src: backend.service
+      dest: /etc/systemd/system/backend.service
+
+  - name: install nginx
+    ansible.builtin.package:
+      name: mysql-server
+      state: present
+
+  - name: Import expense db
+    community.mysql.mysql_db:
+      login_user: root
+      login_password: ExpenseApp@1
+      name: expense
+      state: present
+      target: /app/schema/backend.sql
+      login_host: "mysql.msdevsecops.fun"
+
+  - name: start and Enable backend
+    ansible.builtin.service:
+      name: backend
+      state: started
+      enabled: yes
