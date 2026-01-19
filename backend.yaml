@@ -41,9 +41,9 @@
       src: backend.service
       dest: /etc/systemd/system/backend.service
 
-  - name: install nginx
+  - name: install mysql
     ansible.builtin.package:
-      name: mysql-server
+      name: mysql
       state: present
 
   - name: Import expense db
