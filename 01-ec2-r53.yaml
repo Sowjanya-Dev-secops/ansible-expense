@@ -7,8 +7,9 @@
     zone_id: "Z02877213Q6KXL0HOGN3V"
     domain_name: "msdevsecops.fun"
     instances:
-    - mysql
-    - backend
+    - frontend
+    # - mysql
+    # - backend
   tasks:
   - name: create ec2 instance
     amazon.aws.ec2_instance:
