@@ -8,6 +8,7 @@
     domain_name: "msdevsecops.fun"
     instances:
     - mysql
+    - backend
   tasks:
   - name: create ec2 instance
     amazon.aws.ec2_instance:
