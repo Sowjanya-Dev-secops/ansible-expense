@@ -15,6 +15,11 @@
       name: expense
       comment: add expense system user
       system: true
+  - name: Remove file (delete file)
+    ansible.builtin.file:
+      path: /app
+      state: absent
+
 
   - name: creating app directory
     ansible.builtin.file:
@@ -44,6 +49,11 @@
   - name: install mysql
     ansible.builtin.package:
       name: mysql
+      state: present
+
+  - name: Install PyMySQL on backend
+    ansible.builtin.package:
+      name: python3-PyMySQL
       state: present
 
   - name: Import expense db
